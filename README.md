@@ -24,11 +24,11 @@ cd environments
 ```
 * Create a virtual environment
 ```
-virtualenv senior
+virtualenv chicken
 ```
 * Activate virtual environment
 ```
-cd senior
+cd chicken
 source bin/activate
 ```
 * Then go back to the root

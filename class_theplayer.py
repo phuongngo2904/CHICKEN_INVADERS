@@ -1,4 +1,4 @@
-from class_theship import MyObj
+from class_theobj import MyObj
 from class_bullet import Bullet
 import os 
 import pygame 

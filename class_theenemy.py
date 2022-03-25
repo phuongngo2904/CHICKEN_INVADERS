@@ -1,4 +1,4 @@
-from class_theship import MyObj
+from class_theobj import MyObj
 import os
 import pygame
 import constant as cs 

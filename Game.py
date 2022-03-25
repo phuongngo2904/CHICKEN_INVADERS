@@ -49,8 +49,7 @@ class MyGame:
                         cs.LOST=False
         pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
         self.player.move_center()
-        pygame.display.update()
-        self.clock.tick(15)  
+        pygame.display.update() 
 
     def run_game(self):
         while cs.RUN:

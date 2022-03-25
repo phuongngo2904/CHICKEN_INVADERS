@@ -1,7 +1,7 @@
 # CHICKEN_INVADERS
 # A simple game that we all used to play when we were a kid
 
-![DEMO](https://user-images.githubusercontent.com/74227710/160041296-42e85019-b9cc-4e8c-bfd6-44e6dbb4123a.mov)
+![Demo](https://user-images.githubusercontent.com/74227710/160041296-42e85019-b9cc-4e8c-bfd6-44e6dbb4123a.mov)
 
 # 1. Install pip, python
 

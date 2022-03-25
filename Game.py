@@ -78,6 +78,8 @@ class MyGame:
                     cs.LIFE-=1
                 if e.collide(self.player.bul):
                     e.get_hit()
+                if e.position_y() + e.get_img_height() > cs.HEIGHT:
+                    cs.ENEMY.remove(e)
                 if e.current_hit()==0:
                     cs.SCORE+=1
                     cs.ENEMY.remove(e)

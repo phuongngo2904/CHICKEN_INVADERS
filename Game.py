@@ -1,5 +1,4 @@
 import os
-from pickle import FALSE
 import random
 import pygame
 import constant as cs

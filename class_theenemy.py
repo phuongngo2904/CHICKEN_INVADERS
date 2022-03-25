@@ -1,4 +1,4 @@
-from class_theship import MyShip
+from class_theship import MyObj
 import os
 import pygame
 import constant as cs 
@@ -16,7 +16,7 @@ C3_IMG = pygame.transform.scale(pygame.image.load(C3_PATH),cs.IMAGE_SIZE)
 C4_PATH = os.path.join(os.getcwd(),"images/c4.png")
 C4_IMG = pygame.transform.scale(pygame.image.load(C4_PATH),cs.IMAGE_SIZE)
 
-class Enemy(MyShip):
+class Enemy(MyObj):
     TYPE = {"1": C1_IMG,
             "2": C2_IMG,
             "3": C3_IMG,

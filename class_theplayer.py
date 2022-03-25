@@ -1,11 +1,11 @@
-from class_theship import MyShip
+from class_theship import MyObj
 from class_bullet import Bullet
 import os 
 import pygame 
 import constant as cs 
 
 
-class Player(MyShip):
+class Player(MyObj):
     def __init__(self, x, y):
         super().__init__(x,y)
         self.load_img()

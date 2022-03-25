@@ -55,9 +55,11 @@ class MyGame:
                     cs.RUN=False
                 else:
                     continue
-
-            if len(cs.ENEMY)==0:
+            if cs.SCORE==cs.PREVIOUS_SCORE+10:
                 cs.LEVEL +=1
+                cs.PREVIOUS=cs.SCORE
+                
+            if len(cs.ENEMY)==0:
                 cs.WAVE+=2
                 for i in range(cs.WAVE):
                     enemy = Enemy(random.randrange(0, cs.WIDTH-100),random.randrange(-1600,-100),random.choice(["1","2","3","4"]))

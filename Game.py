@@ -48,16 +48,15 @@ class MyGame:
             if cs.LIFE==0:
                 cs.LOST=True
                 cs.LOST_TIME+=1
+
             if cs.LEVEL == 5:
                 cs.ENEMY_SPEED+=1
             if cs.LOST:
+
                 if cs.LOST_TIME > cs.FPS*4:
                     cs.RUN=False
                 else:
                     continue
-            if cs.SCORE==cs.PREVIOUS_SCORE+10:
-                cs.LEVEL +=1
-                cs.PREVIOUS=cs.SCORE
                 
             if len(cs.ENEMY)==0:
                 cs.WAVE+=2
@@ -84,4 +83,7 @@ class MyGame:
                     cs.ENEMY.remove(e)
                 if e.current_hit()==0:
                     cs.SCORE+=1
+                    if cs.SCORE==cs.PREVIOUS_SCORE+10:
+                        cs.LEVEL +=1
+                        cs.PREVIOUS_SCORE=cs.SCORE
                     cs.ENEMY.remove(e)

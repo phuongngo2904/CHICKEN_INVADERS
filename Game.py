@@ -19,9 +19,9 @@ class MyGame:
 
     def redraw_window(self):
         self.WINDOW.blit(self.BG,(0,0))
-        self.score_label = self.MAIN_FONT.render(f"SCORE: {cs.SCORE}",1,(255,255,255))
-        self.life_label = self.MAIN_FONT.render(f"LIFE: {cs.LIFE}",1,(255,255,255))
-        self.level_label = self.MAIN_FONT.render(f"LEVEL: {cs.LEVEL}",1,(255,255,255))
+        self.score_label = self.MAIN_FONT.render(f"SCORE: {cs.SCORE}",1,(0, 204, 0))
+        self.life_label = self.MAIN_FONT.render(f"LIFE: {cs.LIFE}",1,(0, 204, 0))
+        self.level_label = self.MAIN_FONT.render(f"LEVEL: {cs.LEVEL}",1,(0, 204, 0))
 
         self.WINDOW.blit(self.score_label,(10,10))
         self.WINDOW.blit(self.level_label,(300,10))
@@ -56,7 +56,7 @@ class MyGame:
         while cs.RUN:
             self.clock.tick(cs.FPS)
             self.redraw_window()
-            
+
             if cs.LIFE==0:
                 cs.GAME_OVER=True
                 cs.GO_COUNTER+=1

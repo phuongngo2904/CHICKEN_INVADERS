@@ -38,6 +38,11 @@ class Player(MyShip):
         off_x = ob2.position_x() - self.position_x()
         off_y = ob2.position_y() - self.position_y()
         return self.mask.overlap(ob2.mask,(off_x,off_y)) !=None
+
+    def move_center(self):
+        self.x = cs.WIDTH/2
+        self.y = cs.HEIGHT-100
+        
     def move_shoot(self, keys):
         if keys[pygame.K_LEFT] and self.position_x()-cs.PLAYER_SPEED > 0:
             self.move_left(cs.PLAYER_SPEED)
@@ -49,3 +54,4 @@ class Player(MyShip):
             self.move_down(cs.PLAYER_SPEED)
         if keys[pygame.K_SPACE]:
             self.shoot()
+

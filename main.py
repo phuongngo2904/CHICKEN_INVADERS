@@ -1,6 +1,5 @@
 from Game import MyGame
 import os
-import random
 import pygame
 import constant as cs
 
@@ -26,4 +25,9 @@ if __name__ == "__main__":
                     newgame=MyGame()
                     newgame.set_up() 
                     newgame.run_game()
+
+        if cs.RUN==False:
+            run=False
+
+    pygame.quit()
     

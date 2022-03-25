@@ -40,9 +40,6 @@ cd
 ```
 git --version 
 ```
-* Otherwise, install it:
-
-To install Git for Windows, point your browser at https://git-scm.com/download/win. A download of the Windows Git installer will begin automatically. Once complete, you can double-click the installer and follow the steps.<br />
 * You can view your default Git configuration options with the following command:
 ```
 git config -h

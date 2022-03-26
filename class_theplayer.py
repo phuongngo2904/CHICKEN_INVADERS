@@ -1,12 +1,14 @@
 from class_theobj import MyObj
 from class_bullet import Bullet
+from class_info import PlayerInfo
 import os 
 import pygame 
 import constant as cs 
 
 
-class Player(MyObj):
+class Player(MyObj,PlayerInfo):
     def __init__(self, x, y):
+        PlayerInfo.__init__(self)
         super().__init__(x,y)
         self.load_img()
         self.mask=pygame.mask.from_surface(self.ship_img)

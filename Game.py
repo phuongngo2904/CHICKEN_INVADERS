@@ -18,9 +18,9 @@ class MyGame:
 
     def redraw_window(self):
         self.WINDOW.blit(self.BG,(0,0))
-        self.score_label = self.MAIN_FONT.render(f"SCORE: {cs.SCORE}",1,(0, 204, 0))
-        self.life_label = self.MAIN_FONT.render(f"LIFE: {cs.LIFE}",1,(0, 204, 0))
-        self.level_label = self.MAIN_FONT.render(f"LEVEL: {cs.LEVEL}",1,(0, 204, 0))
+        self.score_label = self.MAIN_FONT.render(f"SCORE: {self.player.get_score()}",1,(0, 204, 0))
+        self.life_label = self.MAIN_FONT.render(f"LIFE: {self.player.get_life()}",1,(0, 204, 0))
+        self.level_label = self.MAIN_FONT.render(f"LEVEL: {self.player.get_level()}",1,(0, 204, 0))
 
         self.WINDOW.blit(self.score_label,(10,10))
         self.WINDOW.blit(self.level_label,(300,10))
@@ -29,6 +29,7 @@ class MyGame:
         for e in cs.ENEMY:
             e.draw(self.WINDOW)
         self.player.draw(self.WINDOW)
+
         pygame.display.update()
 
     def set_up(self):
@@ -65,16 +66,14 @@ class MyGame:
         cs.ENEMY.clear()
         self.player.bul.clear()
         self.player.move_center()
-        cs.LIFE=5
-        cs.LEVEL=0
-        cs.SCORE=0
+        self.player.reset_info()
         cs.ENEMY_SPEED=1
         cs.WAVE=5
 
     def game_over(self):
         while cs.GAME_OVER:
             self.WINDOW.blit(self.BG,(0,0))
-            self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {cs.SCORE}",1,(255,255,255))
+            self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {self.player.get_score()}",1,(255,255,255))
             self.continue_message=self.MAIN_FONT.render(f"Do you want to replay?",1,(255,255,255))
             self.continue_option=self.MAIN_FONT.render(f"YES(y)/NO(n)",1,(255,255,255))
 
@@ -82,17 +81,19 @@ class MyGame:
             self.WINDOW.blit(self.continue_message, (cs.WIDTH/2-self.continue_message.get_width()/2,cs.HEIGHT-400))
             self.WINDOW.blit(self.continue_option, (cs.WIDTH/2-self.continue_option.get_width()/2,cs.HEIGHT-350))
 
-            pygame.display.update()
             for event in pygame.event.get():
                 if event.type==pygame.KEYDOWN:
                     if event.key==pygame.K_y:
                         cs.GAME_OVER=False
-                        self.reset_game() 
+                        cs.LOST=False
+                        self.reset_game()
                     elif event.key==pygame.K_n:
                         cs.GAME_OVER=False
                         cs.RUN=False
-        pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
+
+            pygame.display.update()
         pygame.display.update()
+        
 
     def run_game(self):
         while cs.RUN:
@@ -102,12 +103,12 @@ class MyGame:
             if cs.PAUSE:
                 self.pause_game()
 
-            if cs.LIFE==0:
+            if self.player.get_life()==0:
                 cs.GAME_OVER=True
                 self.game_over()
                 continue
 
-            if cs.LOST and not cs.GAME_OVER:
+            if cs.LOST:
                 self.lose_a_life()
 
             if len(cs.ENEMY)==0:
@@ -128,17 +129,20 @@ class MyGame:
             for e in cs.ENEMY[:]:
                 e.move(cs.ENEMY_SPEED)
                 if self.player.collide(e):
-                    cs.LIFE-=1
+                    self.player.set_life()
                     cs.LOST = True
                 if e.collide(self.player.bul):
                     e.get_hit()
+
                 if e.position_y() + e.get_img_height() > cs.HEIGHT:
                     cs.ENEMY.remove(e)
+
                 if e.current_hit()==0:
-                    cs.SCORE+=1
-                    if cs.SCORE==cs.PREVIOUS_SCORE+10:
-                        cs.LEVEL +=1
-                        cs.PREVIOUS_SCORE=cs.SCORE
+                    self.player.set_score()
+                    if self.player.get_score()%cs.LV_UP_SCORE==0:
+                        self.player.set_level()
+                        if self.player.get_level()%5==0:
+                            cs.ENEMY_SPEED+=1
                     cs.ENEMY.remove(e)
         pygame.quit()
 

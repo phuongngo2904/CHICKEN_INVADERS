@@ -7,7 +7,7 @@ if __name__ == "__main__":
     pygame.font.init()
     MAIN_FONT = pygame.font.SysFont(cs.FONT, cs.F_SIZE)
     WINDOW = pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
-    BG_PATH = os.path.join(os.getcwd(),"images/backgorund.png")
+    BG_PATH = os.path.join(os.getcwd(),"images/background.png")
     BG = pygame.transform.scale(pygame.image.load(BG_PATH),(cs.WIDTH,cs.HEIGHT))
     run = True
     while run:

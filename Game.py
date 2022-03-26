@@ -13,7 +13,7 @@ class MyGame:
         self.load_background_img()
 
     def load_background_img(self):
-        self.BG_PATH = os.path.join(os.getcwd(),"images/backgorund.png")
+        self.BG_PATH = os.path.join(os.getcwd(),"images/background.png")
         self.BG = pygame.transform.scale(pygame.image.load(self.BG_PATH),(cs.WIDTH,cs.HEIGHT))
 
     def redraw_window(self):
@@ -25,7 +25,7 @@ class MyGame:
         self.WINDOW.blit(self.score_label,(10,10))
         self.WINDOW.blit(self.level_label,(300,10))
         self.WINDOW.blit(self.life_label,(cs.WIDTH - self.life_label.get_width()-10, 10))
-        
+
         for e in cs.ENEMY:
             e.draw(self.WINDOW)
         self.player.draw(self.WINDOW)

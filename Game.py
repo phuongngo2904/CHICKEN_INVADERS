@@ -25,11 +25,7 @@ class MyGame:
         self.WINDOW.blit(self.score_label,(10,10))
         self.WINDOW.blit(self.level_label,(300,10))
         self.WINDOW.blit(self.life_label,(cs.WIDTH - self.life_label.get_width()-10, 10))
-
-        # if cs.GAME_OVER:
-        #     self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {cs.SCORE}",1,(255,255,255))
-        #     self.WINDOW.blit(self.go_label,(cs.WIDTH/2-self.go_label.get_width()/2,cs.HEIGHT/2))
-
+        
         for e in cs.ENEMY:
             e.draw(self.WINDOW)
         self.player.draw(self.WINDOW)

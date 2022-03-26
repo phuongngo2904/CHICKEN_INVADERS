@@ -26,9 +26,9 @@ class MyGame:
         self.WINDOW.blit(self.level_label,(300,10))
         self.WINDOW.blit(self.life_label,(cs.WIDTH - self.life_label.get_width()-10, 10))
 
-        if cs.GAME_OVER:
-            self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {cs.SCORE}",1,(255,255,255))
-            self.WINDOW.blit(self.go_label,(cs.WIDTH/2-self.go_label.get_width()/2,cs.HEIGHT/2))
+        # if cs.GAME_OVER:
+        #     self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {cs.SCORE}",1,(255,255,255))
+        #     self.WINDOW.blit(self.go_label,(cs.WIDTH/2-self.go_label.get_width()/2,cs.HEIGHT/2))
 
         for e in cs.ENEMY:
             e.draw(self.WINDOW)
@@ -64,7 +64,40 @@ class MyGame:
                         cs.PAUSE=False
         pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
         pygame.display.update()
-                
+
+    def reset_game(self):
+        cs.ENEMY.clear()
+        self.player.bul.clear()
+        self.player.move_center()
+        cs.LIFE=5
+        cs.LEVEL=0
+        cs.SCORE=0
+        cs.ENEMY_SPEED=1
+        cs.WAVE=5
+
+    def game_over(self):
+        while cs.GAME_OVER:
+            self.WINDOW.blit(self.BG,(0,0))
+            self.go_label = self.MAIN_FONT.render(f"GAME OVER ! Your score is {cs.SCORE}",1,(255,255,255))
+            self.continue_message=self.MAIN_FONT.render(f"Do you want to replay?",1,(255,255,255))
+            self.continue_option=self.MAIN_FONT.render(f"YES(y)/NO(n)",1,(255,255,255))
+
+            self.WINDOW.blit(self.go_label,(cs.WIDTH/2-self.go_label.get_width()/2,cs.HEIGHT-500))
+            self.WINDOW.blit(self.continue_message, (cs.WIDTH/2-self.continue_message.get_width()/2,cs.HEIGHT-400))
+            self.WINDOW.blit(self.continue_option, (cs.WIDTH/2-self.continue_option.get_width()/2,cs.HEIGHT-350))
+
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_y:
+                        cs.GAME_OVER=False
+                        self.reset_game() 
+                    elif event.key==pygame.K_n:
+                        cs.GAME_OVER=False
+                        cs.RUN=False
+        pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
+        pygame.display.update()
+
     def run_game(self):
         while cs.RUN:
             self.clock.tick(cs.FPS)
@@ -75,13 +108,8 @@ class MyGame:
 
             if cs.LIFE==0:
                 cs.GAME_OVER=True
-                cs.GO_COUNTER+=1
-
-            if cs.GAME_OVER:
-                if cs.GO_COUNTER > cs.FPS*4:
-                    cs.RUN=False
-                else:
-                    continue
+                self.game_over()
+                continue
 
             if cs.LOST and not cs.GAME_OVER:
                 self.lose_a_life()

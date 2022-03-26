@@ -38,7 +38,9 @@ class Enemy(MyObj):
         for b in bullet:
             off_x = b.position_x() - self.position_x()
             off_y = b.position_y() - self.position_y()
-            return self.mask.overlap(b.mask,(off_x,off_y)) !=None
+            if self.mask.overlap(b.mask,(off_x,off_y)) !=None:
+                bullet.remove(b)
+                return True
             
     def move(self,speed):
         self.y+=speed;

@@ -33,6 +33,7 @@ class Enemy(MyObj):
 
     def current_hit(self):
         return self.hit
+        
     def collide(self,bullet):
         for b in bullet:
             off_x = b.position_x() - self.position_x()

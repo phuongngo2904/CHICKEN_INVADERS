@@ -54,4 +54,6 @@ class Player(MyObj):
             self.move_down(cs.PLAYER_SPEED)
         if keys[pygame.K_SPACE]:
             self.shoot()
+        if keys[pygame.K_p]:
+            cs.PAUSE=True
 

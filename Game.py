@@ -40,20 +40,38 @@ class MyGame:
         self.player = Player(cs.WIDTH/2,cs.HEIGHT-100)
         pygame.display.set_caption("CHICKEN INVADERS")
 
-    def lose_a_life(self):
-        while cs.LOST:  
+    def lose_a_life(self):  
+        while cs.LOST:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key==pygame.K_SPACE:
                         cs.LOST=False
+            pygame.display.update() 
         pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
         self.player.move_center()
         pygame.display.update() 
 
+    def pause_game(self):
+        while cs.PAUSE:
+            self.WINDOW.blit(self.BG,(0,0))
+
+            self.pause_msm = self.MAIN_FONT.render(f"Press P to continue...",1,(255,255,255))
+            self.WINDOW.blit(self.pause_msm,(cs.WIDTH/2-self.pause_msm.get_width()/2,cs.HEIGHT/2))
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_p:
+                        cs.PAUSE=False
+        pygame.display.set_mode((cs.WIDTH, cs.HEIGHT))
+        pygame.display.update()
+                
     def run_game(self):
         while cs.RUN:
             self.clock.tick(cs.FPS)
             self.redraw_window()
+
+            if cs.PAUSE:
+                self.pause_game()
 
             if cs.LIFE==0:
                 cs.GAME_OVER=True

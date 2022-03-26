@@ -110,9 +110,6 @@ class MyGame:
             if cs.LOST and not cs.GAME_OVER:
                 self.lose_a_life()
 
-            if cs.LEVEL == 5:
-                cs.ENEMY_SPEED+=1
-
             if len(cs.ENEMY)==0:
                 cs.WAVE+=2
                 for i in range(cs.WAVE):
